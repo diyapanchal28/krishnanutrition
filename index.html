@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nutritionist | Healthy Life</title>
+
+  <style>
+    :root {
+      --primary: #2e8b57;
+      --secondary: #f4f9f6;
+      --dark: #222;
+      --light: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      background: var(--light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    header .logo img {
+      height: 48px;
+      display: block;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* ===== HAMBURGER MENU ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav.mobile-open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--light);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      gap: 15px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+    }
+
+    nav.mobile-open a {
+      margin-left: 0;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(to right, #e8f5ee, #f9fffc);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 40px;
+      gap: 40px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero-text h1 {
+      font-size: 42px;
+      color: var(--dark);
+    }
+
+    .hero-text p {
+      margin: 15px 0 25px;
+      color: #555;
+    }
+
+    .hero-text button {
+      padding: 12px 28px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .hero-text a.contact-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .hero img {
+      width: 720px;
+      max-width: 60%;
+      object-fit: cover;
+    }
+
+    /* Larger, simple (no rounded corners) hero image when class present */
+    .hero img.hero-image.simple {
+      border-radius: 0;
+      width: 760px;
+      max-width: 65%;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 80px 40px;
+      background: white;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-size: 34px;
+      margin-bottom: 30px;
+      color: var(--dark);
+      text-align: center;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .about-item {
+      padding: 20px;
+      background: var(--secondary);
+      border-radius: 12px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .about-item h3 {
+      font-size: 22px;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .about-item p {
+      color: #555;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    /* ===== RESULTS (UPDATED DESIGN) ===== */
+    .results {
+      padding: 80px 20px;
+      background: linear-gradient(to bottom, #ffffff, #f0faf5);
+      text-align: center;
+    }
+
+    .results h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .results p {
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    .result-cards {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      flex-wrap: nowrap;
+    }
+
+    /* Single large result card */
+    .result-card {
+      width: 760px;
+      max-width: 100%;
+      height: 440px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .result-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .result-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .result-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      padding: 10px;
+      font-weight: 600;
+    }
+
+    .see-more-btn {
+      margin-top: 45px;
+      padding: 14px 36px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      background: var(--secondary);
+      padding: 70px 20px;
+      text-align: center;
+    }
+
+    .services h2 {
+      margin-bottom: 40px;
+      font-size: 32px;
+    }
+
+    .service-list {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .service {
+      background: white;
+      width: 280px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-image {
+      width: 100%;
+      height: 200px;
+      background: var(--secondary);
+      overflow: hidden;
+    }
+
+    .service-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .service-content {
+      padding: 25px;
+    }
+
+    .service h3 {
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .service p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      padding: 80px 40px;
+      text-align: center;
+      background: linear-gradient(to bottom, #f0faf5, #ffffff);
+    }
+
+    .contact h2 {
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: var(--dark);
+    }
+
+    .contact-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-info {
+      text-align: left;
+    }
+
+    .contact-info-item {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+    }
+
+    .contact-info-item h3 {
+      font-size: 18px;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .contact-info-item p {
+      color: #555;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(46, 139, 87, 0.2);
+    }
+
+    .social-icon:hover {
+      background: #246a42;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(46, 139, 87, 0.3);
+    }
+
+    .social-icon img {
+      width: 60%;
+      height: 60%;
+      object-fit: contain;
+      display: block;
+      filter: none;
+    }
+
+    .social-icon.instagram {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .social-icon.instagram:hover {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      opacity: 0.8;
+    }
+
+    .social-icon.whatsapp {
+      background: #25d366;
+    }
+
+    .social-icon.whatsapp:hover {
+      background: #1ba85a;
+    }
+
+    .social-icon.facebook {
+      background: #1877f2;
+    }
+
+    .social-icon.facebook:hover {
+      background: #0a66c2;
+    }
+
+    .contact-message {
+      text-align: center;
+      padding: 30px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .contact-message h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .contact-message p {
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .contact-cta {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact-cta:hover {
+      background: #246a42;
+      transform: translateY(-3px);
+    }
+
+    /* About item full width styling */
+    .about-item-full {
+      grid-column: 1 / -1;
+      margin-top: 20px;
+    }
+
+    /* Contact link styling */
+    .contact-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact footer message */
+    .contact-footer-msg {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: row;
+        gap: 10px;
+        padding: 15px 20px;
+        justify-content: space-between;
+      }
+
+      header .logo {
+        font-size: 20px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        display: none;
+      }
+
+      nav.mobile-open {
+        display: flex;
+      }
+
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 20px;
+      }
+
+        .hero-text h1 {
+          font-size: 32px;
+        }
+
+      .hero img {
+        width: 100%;
+        max-width: 480px;
+        margin-top: 18px;
+      }
+
+      .hero img.hero-image.simple {
+        max-width: 100%;
+        width: 100%;
+      }
+
+      /* Make the large result card stack nicely on mobile */
+      .result-cards {
+        padding: 0 10px;
+        flex-wrap: wrap;
+      }
+
+      .result-card {
+        width: 100%;
+        height: auto;
+      }
+
+      .result-card img {
+        height: auto;
+      }
+
+      /* Responsive About section */
+      .about {
+        padding: 60px 20px;
+      }
+
+      .about h2 {
+        font-size: 28px;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .about-item {
+        padding: 15px;
+      }
+
+      .about-item h3 {
+        font-size: 18px;
+      }
+
+      .about-item p {
+        font-size: 14px;
+      }
+
+      /* Mobile Contact tweaks */
+      .contact {
+        padding: 40px 18px;
+      }
+
+      .contact h2 {
+        font-size: 26px;
+        margin-bottom: 20px;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .contact-info {
+        text-align: center;
+      }
+
+      .contact-info-item h3 {
+        font-size: 16px;
+      }
+
+      .contact-info-item p {
+        font-size: 15px;
+      }
+
+      .social-icons {
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .social-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 26px;
+      }
+
+      .contact-footer-msg {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <a href="#home" class="logo" aria-label="Krishna Nutrition Home">
+    <img src="images/mainlogo.png" alt="Krishna Nutrition logo" onerror="this.onerror=null;this.style.display='none'">
+  </a>
+  <button class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav id="navMenu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#results">Results</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <h1>Healthy Body, Healthy Life</h1>
+    <p>
+      Professional nutrition guidance to help you lose weight, gain energy,
+      and live a balanced lifestyle.
+    </p>
+    <a href="https://wa.link/cjnxnb" target="_blank" rel="noopener noreferrer" class="contact-btn">Contact Us</a>
+  </div>
+  <img src="images/main.jpg" alt="Nutritionist illustration" class="hero-image simple" onerror="this.onerror=null;this.src='images/main.png';">
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <h2>About Me & Our Center</h2>
+  <div class="about-content">
+    <div class="about-item">
+      <h3>Who I Am</h3>
+      <p>I'm Deepti Mistry! I started using Herbalife products, which transformed my energy, lifestyle, and health. Sharing my results led to a full-time Herbalife career, allowing me to spend more time with my family, travel internationally, and achieve a better lifestyle. I love what I do and helping others transform their lives!</p>
+    </div>
+    <div class="about-item">
+      <h3>About Krishna Nutrition Center</h3>
+      <p>Established in 2016, Krishna Nutrition Center in Bardoli is a top Herbalife distributor, providing nutrition and wellness products to local and regional customers. Our dedicated team ensures high-quality service and customer satisfaction. We aim to expand our offerings and continue inspiring healthier lifestyles.</p>
+    </div>
+  </div>
+  <div class="about-item about-item-full">
+    <h3>My Philosophy</h3>
+    <p>Wellness guidance is my passion.I focus on positivity and encourage others to lead healthier, happier lives. Let's start your transformation!</p>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results" id="results">
+  <h2>Transformation Results</h2>
+  <p>Real people. Real transformations.</p>
+
+  <div class="result-cards">
+    <div class="result-card">
+      <img src="images/coach.png" alt="Transformation example - Large showcase image">
+      
+    </div>
+  </div>
+
+  <!-- SEE MORE BUTTON -->
+  <a href="results.html" class="see-more-btn" role="button" aria-label="See more transformations">See More Transformations</a>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Our Services</h2>
+  <div class="service-list">
+    <div class="service">
+      <div class="service-image">
+        <img src="images/diet.png" alt="Personal Diet Plans service">
+      </div>
+      <div class="service-content">
+        <h3>Personal Diet Plans</h3>
+        <p>Customized nutrition plans based on your body and goals.</p>
+      </div>
+    </div>
+    <div class="service">
+      <div class="service-image">
+        <img src="images/weight.png" alt="Weight Management service">
+      </div>
+      <div class="service-content">
+        <h3>Weight Management</h3>
+        <p>Safe and sustainable weight loss or weight gain programs.</p>
+      </div>
+    </div>
+    <div class="service">
+      <div class="service-image">
+        <img src="images/online.jpeg" alt="Consultation service">
+      </div>
+      <div class="service-content">
+        <h3>Consultation</h3>
+        <p>Get expert advice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Get In Touch</h2>
+  <div class="contact-container">
+    <div class="contact-info">
+      <div class="contact-info-item">
+        <h3>📍 Address</h3>
+        <p>Krishna Nutrition Center<br>F-8 Desai Market, Opp. Orchid Hub and Galaxy Hospital<br>Mahatma Gandhi Road<br>Bardoli, Surat, Gujarat 394601<br>India</p>
+      </div>
+      <div class="contact-info-item">
+        <h3>📞 Phone</h3>
+        <p><a href="tel:+919327389982" class="contact-link">+91 9327389982</a></p>
+      </div>
+      <div class="contact-info-item">
+        <h3>✉️ Email</h3>
+        <p><a href="mailto:krishnanutrition2016@gmail.com" class="contact-link">info@krishnanutritiion.com</a></p>
+      </div>
+    </div>
+
+    <div class="contact-message">
+      <h3>Follow Us</h3>
+      <p>Connect with us on social media for daily wellness tips, transformations, and updates!</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/dipti.jesal?igsh=OHBxZ2lkMzV1a3Rj" target="_blank" rel="noopener noreferrer" class="social-icon instagram" title="Instagram" aria-label="Follow us on Instagram">
+          <img src="images/instagram.png" alt="Instagram">
+        </a>
+        <a href="https://wa.link/cjnxnb" target="_blank" rel="noopener noreferrer" class="social-icon whatsapp" title="WhatsApp" aria-label="Chat with us on WhatsApp">
+          <img src="images/whatsapp.png" alt="WhatsApp">
+        </a>
+        <a href="https://www.facebook.com/share/14TcVf6YitF/" target="_blank" rel="noopener noreferrer" class="social-icon facebook" title="Facebook" aria-label="Like us on Facebook">
+          <img src="images/facebook.png" alt="Facebook">
+        </a>
+      </div>
+      <p class="contact-footer-msg">We'd love to hear from you! Reach out with any questions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Krishna Nutrition Center. All rights reserved.
+</footer>
+
+</body>
+
+<script>
+  // Hamburger Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  menuToggle.addEventListener('click', function() {
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('mobile-open');
+  });
+
+  // Close menu when a link is clicked
+  const navLinks = navMenu.querySelectorAll('a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('mobile-open');
+    });
+  });
+</script>
+</html>
