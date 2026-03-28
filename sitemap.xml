@@ -3,26 +3,14 @@
 
    <url>
       <loc>https://krishnanutrition.com/</loc>
-      <lastmod>2026-03-27</lastmod>
+      <lastmod>2026-03-28</lastmod>
       <priority>1.0</priority>
    </url>
 
    <url>
-      <loc>https://krishnanutrition.com/about.html</loc>
-      <lastmod>2026-03-27</lastmod>
+      <loc>https://krishnanutrition.com/results.html</loc>
+      <lastmod>2026-03-28</lastmod>
       <priority>0.8</priority>
-   </url>
-
-   <url>
-      <loc>https://krishnanutrition.com/contact.html</loc>
-      <lastmod>2026-03-27</lastmod>
-      <priority>0.8</priority>
-   </url>
-
-   <url>
-      <loc>https://krishnanutrition.com/services.html</loc>
-      <lastmod>2026-03-27</lastmod>
-      <priority>0.9</priority>
    </url>
 
 </urlset>
