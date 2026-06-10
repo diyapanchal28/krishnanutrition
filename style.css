@@ -310,6 +310,23 @@ nav a:hover::after { width: 100%; }
   background: var(--primary-light);
   transform: translateY(-3px);
 }
+.google {
+  background: white;
+  color: #3c4043;
+  border: 2px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.google:hover {
+  background: #f8f9fa;
+  border-color: #dadce0;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.contact-google-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
 
 /* HERO IMAGE */
 .hero-image { flex: 1; display: flex; justify-content: center; align-items: flex-end; }
